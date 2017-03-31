@@ -1,16 +1,17 @@
 package chapter_2;
 
 import java.util.HashSet;
-import library.LinkedListNode;
+import library.LinkedList;
 
 public class Remove_Dups {
-	public static void deleteDups(LinkedListNode n) {
+	public static void deleteDups1(LinkedList n) {
 		HashSet<Integer> set = new HashSet<Integer>();
-		LinkedListNode previous = null;
-		while (n != null) {
-			if (set.contains(n.data)) {
+		LinkedList previous = null;
+		while(n != null) {
+			if(set.contains(n.data)) {
 				previous.next = n.next;
-			} else {
+			}
+			else {
 				set.add(n.data);
 				previous = n;
 			}
@@ -18,18 +19,26 @@ public class Remove_Dups {
 		}
 	}
 	
-	public static void main(String[] args) {	
-		LinkedListNode first = new LinkedListNode(0, null, null); //AssortedMethods.randomLinkedList(1000, 0, 2);
-		LinkedListNode head = first;
-		LinkedListNode second = first;
-		for (int i = 1; i < 8; i++) {
-			second = new LinkedListNode(i % 2, null, null);
-			first.setNext(second);
-			second.setPrevious(first);
-			first = second;
+	public static void deleteDups2(LinkedList n) {
+		while(n != null) {
+			LinkedList runner = n;
+			while(runner.next != null) {
+				if(runner.next.data == n.data) {
+					runner.next = runner.next.next;
+				}
+				else {
+					runner = runner.next;
+				}
+			}
+			n = n.next;
 		}
-		System.out.println(head.printForward());
-		deleteDups(head);
-		System.out.println(head.printForward());
+	}
+	
+	public static void main(String[] args) {	
+		int[] list = {1,1,2,3,3,4,2,5,5};
+        LinkedList n = LinkedList.buildList(list);
+        LinkedList.printList(n);
+        deleteDups2(n);
+        LinkedList.printList(n);
 	}
 }
