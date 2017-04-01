@@ -1,12 +1,12 @@
 package chapter_2;
 
 import java.util.HashSet;
-import library.LinkedList;
+import library.LinkedListNode;
 
 public class Remove_Dups {
-	public static void deleteDups1(LinkedList n) {
+	public static void deleteDups1(LinkedListNode n) {
 		HashSet<Integer> set = new HashSet<Integer>();
-		LinkedList previous = null;
+		LinkedListNode previous = null;
 		while(n != null) {
 			if(set.contains(n.data)) {
 				previous.next = n.next;
@@ -19,9 +19,9 @@ public class Remove_Dups {
 		}
 	}
 	
-	public static void deleteDups2(LinkedList n) {
+	public static void deleteDups2(LinkedListNode n) {
 		while(n != null) {
-			LinkedList runner = n;
+			LinkedListNode runner = n;
 			while(runner.next != null) {
 				if(runner.next.data == n.data) {
 					runner.next = runner.next.next;
@@ -36,9 +36,9 @@ public class Remove_Dups {
 	
 	public static void main(String[] args) {	
 		int[] list = {1,1,2,3,3,4,2,5,5};
-        LinkedList n = LinkedList.buildList(list);
-        LinkedList.printList(n);
+        LinkedListNode n = LinkedListNode.buildList(list);
+        LinkedListNode.printList(n);
         deleteDups2(n);
-        LinkedList.printList(n);
+        LinkedListNode.printList(n);
 	}
 }

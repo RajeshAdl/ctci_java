@@ -1,54 +1,39 @@
 package library;
 
 public class LinkedListNode {
-	
-	public LinkedListNode next;
-	public LinkedListNode prev;
-	public LinkedListNode last;
 	public int data;
-	public LinkedListNode(int d, LinkedListNode n, LinkedListNode p) {
-		data = d;
-		setNext(n);
-		setPrevious(p);
+	public LinkedListNode next = null;
+	
+	LinkedListNode(int data) {
+		this.data = data;
 	}
 	
-	public LinkedListNode(int d) {
-		data = d;
-	}	
-	
-	public LinkedListNode() { }
-
-	public void setNext(LinkedListNode n) {
-		next = n;
-		if (this == last) {
-			last = n;
+	public static LinkedListNode buildList(int[] a) {
+		if(a == null || a.length == 0)
+			return null;
+		LinkedListNode n = new LinkedListNode(a[0]);
+		LinkedListNode head = n;
+		for(int i=1; i<a.length; i++) {
+			n.next = new LinkedListNode(a[i]);
+			n = n.next;
 		}
-		if (n != null && n.prev != this) {
-			n.setPrevious(this);
-		}
+		return head;
 	}
 	
-	public void setPrevious(LinkedListNode p) {
-		prev = p;
-		if (p != null && p.next != this) {
-			p.setNext(this);
+	public static int length(LinkedListNode n) {
+		int length = 0;
+		while(n != null) {
+			n = n.next;
+			length++;
 		}
-	}	
-	
-	public String printForward() {
-		if (next != null) {
-			return data + "->" + next.printForward();
-		} else {
-			return ((Integer) data).toString();
-		}
+		return length;
 	}
 	
-	public LinkedListNode clone() {
-		LinkedListNode next2 = null;
-		if (next != null) {
-			next2 = next.clone();
+	public static void printList(LinkedListNode n) {
+		while(n.next != null) {
+			System.out.printf(n.data+ "->");
+			n = n.next;
 		}
-		LinkedListNode head2 = new LinkedListNode(data, next2, null);
-		return head2;
+		System.out.println("null");
 	}
 }
