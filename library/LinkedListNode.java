@@ -30,7 +30,7 @@ public class LinkedListNode {
 	}
 	
 	public static void printList(LinkedListNode n) {
-		while(n.next != null) {
+		while(n != null) {
 			System.out.printf(n.data+ "->");
 			n = n.next;
 		}
