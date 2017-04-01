@@ -4,6 +4,10 @@ import library.LinkedListNode;
 
 public class KthToTheLast {
 	
+	public static class Index {
+		public int value = 0;
+	}
+	
 	public static void printKthFromLast1(LinkedListNode n, int index) {
 		int len = LinkedListNode.length(n);
 		index = len - index;
@@ -34,12 +38,32 @@ public class KthToTheLast {
 		System.out.println(head.data);
 	}
 	
+	public static LinkedListNode KthFromLast3(LinkedListNode n, int index) {
+		Index val = new Index();
+		return KthFromLast3_Helper(n, index, val);
+	}
+	
+	public static LinkedListNode KthFromLast3_Helper(LinkedListNode n, int index, Index idx) {
+		if(n == null) {
+			return null;
+		}
+		
+		LinkedListNode node = KthFromLast3_Helper(n.next, index, idx);
+		idx.value = idx.value + 1;
+		if(idx.value == index) {
+			return n;
+		}
+		return node;
+	}
+	
 	public static void main(String[] args) {
 		int[] list = {1, 2, 3, 4, 5, 6, 7};
 		LinkedListNode n = LinkedListNode.buildList(list);
 		LinkedListNode.printList(n);
 		printKthFromLast1(n, 5);
 		printKthFromLast2(n, 5);
+		LinkedListNode result = KthFromLast3(n, 5);
+		System.out.println(result.data);
 	}
 
 }
