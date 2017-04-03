@@ -67,7 +67,7 @@ public class Partition {
 		int[] a = {1, 4, 6, 7, 3, 2, 5, 9};
 		LinkedListNode head = LinkedListNode.buildList(a);
 		LinkedListNode.printList(head);
-		head = partition2(head, 5);
+		head = partition(head, 4);
 		LinkedListNode.printList(head);
 	}
 }
